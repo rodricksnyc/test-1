@@ -5,39 +5,26 @@ import { Accordion, AccordionButton, AccordionCollapse, AccordionContext, Alert,
 import Accordions from "./Accordions";
 
 function SelectTabs() {
-  const [key, setKey] = useState(0);
-
-
+  const [key, setKey] = useState("generic");
 
   return (
-
     <Tabs
-    defaultActiveKey={0}
-    activeKey={key}
-
-    onSelect={(key) => setKey(key)}
-    className="mb-5">
-    <Tab eventKey={0} title="GENERIC" value="Generic">
-
-    <Accordions eventKey={0}/>
-
-
-    </Tab>
-    <Tab eventKey={1} title="SYNGENTA" value="Syngenta">
-
-      <Accordions eventKey={1}/>
-
-    </Tab>
-
-    <Tab eventKey={2} title="WORDPRESS" value="Wordpress">
-    <Accordions eventKey={2}/>
-    </Tab>
-    <Tab eventKey={3} title="MARKETING CLOUD" value="MC">
-      <Accordions eventKey={3}/>
-    </Tab>
+      defaultActiveKey={key}
+      onSelect={(key) => setKey(key)}
+      className="mb-5">
+      <Tab eventKey="generic" title="GENERIC" value="Generic">
+        <Accordions eventKey={key} />
+      </Tab>
+      <Tab eventKey="syngenta" title="SYNGENTA" value="Syngenta">
+        <Accordions eventKey={key} />
+      </Tab>
+      <Tab eventKey="wordpress" title="WORDPRESS" value="Wordpress">
+        <Accordions eventKey={key} />
+      </Tab>
+      <Tab eventKey="marketingCloud" title="MARKETING CLOUD" value="MC">
+        <Accordions eventKey={key} />
+      </Tab>
     </Tabs>
-
-
   );
 }
 

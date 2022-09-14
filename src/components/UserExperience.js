@@ -34,7 +34,10 @@ const UserExperience = (props) => {
     </tr>
     </thead>
     <tbody>
-    <UserExperienceRadioButtons eventKey={props.eventKey}/>
+      <UserExperienceRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
 
     </tbody>
     </Table>

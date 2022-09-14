@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from 'react';
 
 import TooltipButton from "./TooltipButton";
 import { Accordion, AccordionButton, AccordionCollapse, AccordionContext, Alert, Anchor, Badge, Breadcrumb, BreadcrumbItem, Button, ButtonGroup, ButtonToolbar, Card, CardGroup, CardImg, Carousel, CarouselItem, CloseButton, Col, Collapse, Container, Dropdown, DropdownButton, Fade, Figure, FloatingLabel, Form, FormCheck, FormControl, FormFloating, FormGroup, FormLabel, FormSelect, FormText, Image, InputGroup, ListGroup, ListGroupItem, Modal, ModalBody, ModalDialog, ModalFooter, ModalHeader, ModalTitle, Nav, NavDropdown, NavItem, NavLink, Navbar, NavbarBrand, Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle, Overlay, OverlayTrigger, PageItem, Pagination, Placeholder, PlaceholderButton, Popover, PopoverBody, PopoverHeader, ProgressBar, Ratio, Row, SSRProvider, Spinner, SplitButton, Stack, Tab, TabContainer, TabContent, TabPane, Table, Tabs, ThemeProvider, Toast, ToastBody, ToastContainer, ToastHeader, ToggleButton, ToggleButtonGroup, Tooltip} from 'react-bootstrap';
@@ -9,7 +9,7 @@ var selectedButtons = [
 
   {
 
-    showOnly1:1,
+
     comment:'Load order: hf2017.css loads before any page specific styles',
     tooltip: <TooltipButton text='You will have a very bad time if this is incorrect.'/>,
     name: 'loadOrder',
@@ -33,10 +33,6 @@ var selectedButtons = [
 
 
     {
-      showOnly:0,
-      showOnly1:1,
-      showOnly2:2,
-      showOnly3:3,
 
       comment:"Responsive: Page responsively adapts at all supported viewport sizes",
       tooltip: <TooltipButton text='Standard range is from 1920px down to 375px.'/>,
@@ -60,10 +56,6 @@ var selectedButtons = [
     },
 
     {
-      showOnly:0,
-      showOnly1:1,
-      showOnly2:2,
-      showOnly3:3,
 
       comment:'Desktop browsers: Page works as intended in Chrome, Firefox, Safari, and Edge',
       tooltip: <TooltipButton title='Test utilizing <a href="https://www.browserstack.com/" target="_blank">BrowserStack</a>'/>,
@@ -87,10 +79,6 @@ var selectedButtons = [
     },
 
     {
-      showOnly:0,
-      showOnly1:1,
-      showOnly2:2,
-      showOnly3:3,
 
       comment:'Mobile browsers: Page works as intended in iOS Safari and Android Chrome',
       tooltip: <TooltipButton title='Test utilizing <a href="https://www.browserstack.com/" target="_blank">BrowserStack</a>'/>,
@@ -118,84 +106,116 @@ var selectedButtons = [
 
 ];
 
-function CssRadioButtons(props) {
+function CssRadioButtons({radioValues, setRadioValues, eventKey}) {
+
+
+  const [input, setInput] = useState("");
+
+  const handleChange = (e) => {
+    setRadioValues([
+      {
+        ...radioValues[0],
+        [eventKey]: {
+          ...radioValues[0][eventKey],
+          [e.target.name]: e.target.value,
+        },
+      },
+    ]);
+  };
+
+  console.log(radioValues);
 
 var buttons = [];
 
 
-function handleClick(e) {
-  console.log(e.target.value);
-}
 
- selectedButtons.forEach(function(selectedButton, i){
+const filteredSelectedButtons = selectedButtons.filter((button) => {
+  if (eventKey === "generic" || eventKey === "wordpress" || eventKey === "marketingCloud") {
+    if (
+      button.name !== "loadOrder"
+    ){
 
-  if(selectedButton.showOnly === props.eventKey || selectedButton.showOnly1 === props.eventKey || selectedButton.showOnly2 === props.eventKey || selectedButton.showOnly3 === props.eventKey) {
-    buttons.push(
-
-      <tr className="mx-row">
-      <td align="top" className="mx-question">
-
-      <p className="prompt gray"><span>{selectedButton.comment}</span>
-      {selectedButton.tooltip}
-
-
-      </p>
-      </td>
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value1}
-        id={selectedButton.id1}
-        onClick={(e) => handleClick(e)} />
-        <label className="form-check-label" htmlFor={selectedButton.for1}>{selectedButton.label1}</label>
-      </td>
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value2}
-        id={selectedButton.id2}
-        onClick={(e) => handleClick(e)} />
-        <label className="form-check-label" htmlFor={selectedButton.for2}>{selectedButton.label2}</label>
-      </td>
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value3}
-        id={selectedButton.id3}
-        onClick={(e) => handleClick(e)} />
-        <label className="form-check-label" htmlFor={selectedButton.for3}>{selectedButton.label3}</label>
-      </td>
-
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value4}
-        id={selectedButton.id4}
-        onClick={(e) => handleClick(e)} />
-        <label className="form-check-label" htmlFor={selectedButton.for4}>{selectedButton.label4}</label>
-      </td>
-
-      </tr>
-
-    )
-
+      return button;
+    }
   }
-  else{
-
+  else {
+    return selectedButtons;
   }
-  });
+});
+
+return (
+  <>
+
+  {filteredSelectedButtons.map((selectedButton) => (
+          <tr className="mx-row">
+            <td align="top" className="mx-question">
+              <p className="prompt gray">
+                <span>{selectedButton.comment}</span>
+                {selectedButton.tooltip}
+              </p>
+            </td>
+
+            <td className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                name={selectedButton.name}
+                value={selectedButton.value1}
+                id={selectedButton.id1}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor={selectedButton.for1}>
+                {selectedButton.label1}
+              </label>
+            </td>
+
+            <td className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                name={selectedButton.name}
+                value={selectedButton.value2}
+                id={selectedButton.id2}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor={selectedButton.for2}>
+                {selectedButton.label2}
+              </label>
+            </td>
+
+            <td className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                name={selectedButton.name}
+                value={selectedButton.value3}
+                id={selectedButton.id3}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor={selectedButton.for3}>
+                {selectedButton.label3}
+              </label>
+            </td>
+
+            <td className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                name={selectedButton.name}
+                value={selectedButton.value4}
+                id={selectedButton.id4}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor={selectedButton.for4}>
+                {selectedButton.label4}
+              </label>
+            </td>
+          </tr>
+        ))}
 
 
-
-      return (
-        <>
-      {buttons}
-        </>
-      );
+  </>
+);
 
 
 

@@ -149,7 +149,7 @@ var selectedButtons = [
       label4: "N/A",
     },
     {
-      showOnly:3,
+
       comment: "BugHerd: Script has been added or removed as needed",
       tooltip: <TooltipButton text="Contact your Project Manager if you need this snippet provided."/>,
       name: 'bugherd',
@@ -171,7 +171,7 @@ var selectedButtons = [
       label4: "N/A",
     },
     {
-      showOnly:3,
+
       comment: "Favicon: A favicon has been created and displays correctly",
       tooltip: <TooltipButton text={myHTML4}/>,
       name: 'favicon',
@@ -193,7 +193,7 @@ var selectedButtons = [
       label4: "N/A",
     },
     {
-      showOnly:3,
+
       comment: "Canonical: A canonical URL is specified if applicable",
       tooltip: <TooltipButton text={myHTML5}/>,
       name: 'canonical',
@@ -236,7 +236,7 @@ var selectedButtons = [
     label4: "N/A",
   },
   {
-  showOnly:3,
+
   comment: "Facebook Open Graph: Basic tags are included and populated",
   tooltip: <TooltipButton text={myHTML6}/>,
   name: 'fb',
@@ -303,96 +303,112 @@ label4: "N/A",
 
 ];
 
-function HeadRadioButtons({saveTodo, eventKey}) {
+function HeadRadioButtons({radioValues, setRadioValues, eventKey}) {
 
 
   const [input, setInput] = useState("");
 
+  const handleChange = (e) => {
+    setRadioValues([
+      {
+        ...radioValues[0],
+        [eventKey]: {
+          ...radioValues[0][eventKey],
+          [e.target.name]: e.target.value,
+        },
+      },
+    ]);
+  };
 
+  console.log(radioValues);
 
 var buttons = [];
 
-
-selectedButtons.forEach(function(selectedButton, i){
-
-  if(selectedButton.showOnly === eventKey) {
-     return false;
-
-
+const filteredSelectedButtons = selectedButtons.filter((button) => {
+  if (eventKey === "marketingCloud") {
+    if (
+      button.name !== "bugherd" &&
+      button.name !== "favicon" &&
+      button.name !== "canonical" &&
+      button.name !== "fb"
+    ) {
+      return button;
+    }
+  } else {
+    return selectedButtons;
   }
+});
 
-  else {
-
-    buttons.push(
-
-      <tr className="mx-row">
-      <td align="top" className="mx-question">
-
-      <p className="prompt gray"><span>{selectedButton.comment}</span>
-      {selectedButton.tooltip}
-
-
-      </p>
-      </td>
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value1}
-        id={selectedButton.id1}
-
-        onChange={(e) => setInput(e)}
-         />
-        <label className="form-check-label" htmlFor={selectedButton.for1}>{selectedButton.label1}</label>
-      </td>
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value2}
-        id={selectedButton.id2}
-
-        onChange={(e) => setInput(e)}
-        />
-        <label className="form-check-label" htmlFor={selectedButton.for2}>{selectedButton.label2}</label>
-      </td>
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value3}
-        id={selectedButton.id3}
-
-        onChange={(e) => setInput(e)} />
-        <label className="form-check-label" htmlFor={selectedButton.for3}>{selectedButton.label3}</label>
-      </td>
-
-
-      <td className="form-check">
-        <input type="radio" className="form-check-input"
-        name={selectedButton.name}
-        value={selectedButton.value4}
-        id={selectedButton.id4}
-        onChange={(e) => setInput(e)} />
-        <label className="form-check-label" htmlFor={selectedButton.for4}>{selectedButton.label4}</label>
-      </td>
-
-      </tr>
-
-
-
-    )
-
-
-  }
-
-
- });
 
     return (
       <>
 
-    {buttons}
+      {filteredSelectedButtons.map((selectedButton) => (
+              <tr className="mx-row">
+                <td align="top" className="mx-question">
+                  <p className="prompt gray">
+                    <span>{selectedButton.comment}</span>
+                    {selectedButton.tooltip}
+                  </p>
+                </td>
+
+                <td className="form-check">
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    name={selectedButton.name}
+                    value={selectedButton.value1}
+                    id={selectedButton.id1}
+                    onChange={handleChange}
+                  />
+                  <label className="form-check-label" htmlFor={selectedButton.for1}>
+                    {selectedButton.label1}
+                  </label>
+                </td>
+
+                <td className="form-check">
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    name={selectedButton.name}
+                    value={selectedButton.value2}
+                    id={selectedButton.id2}
+                    onChange={handleChange}
+                  />
+                  <label className="form-check-label" htmlFor={selectedButton.for2}>
+                    {selectedButton.label2}
+                  </label>
+                </td>
+
+                <td className="form-check">
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    name={selectedButton.name}
+                    value={selectedButton.value3}
+                    id={selectedButton.id3}
+                    onChange={handleChange}
+                  />
+                  <label className="form-check-label" htmlFor={selectedButton.for3}>
+                    {selectedButton.label3}
+                  </label>
+                </td>
+
+                <td className="form-check">
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    name={selectedButton.name}
+                    value={selectedButton.value4}
+                    id={selectedButton.id4}
+                    onChange={handleChange}
+                  />
+                  <label className="form-check-label" htmlFor={selectedButton.for4}>
+                    {selectedButton.label4}
+                  </label>
+                </td>
+              </tr>
+            ))}
 
 
       </>

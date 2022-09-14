@@ -35,7 +35,10 @@ const Navigation = (props) => {
     </thead>
     <tbody>
 
-    <NavigationRadioButtons eventKey={props.eventKey}/>
+    <NavigationRadioButtons
+      eventKey={props.eventKey}
+      radioValues={props.radioValues}
+      setRadioValues={props.setRadioValues} />
 
 
     </tbody>

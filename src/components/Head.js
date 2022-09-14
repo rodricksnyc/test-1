@@ -7,7 +7,7 @@ import { Accordion, AccordionButton, AccordionCollapse, AccordionContext, Alert,
 import HeadRadioButtons from "./HeadRadioButtons";
 
 
-const Head = ({saveTodo, eventKey}) => {
+const Head = (props) => {
 
 
   return (
@@ -39,7 +39,10 @@ const Head = ({saveTodo, eventKey}) => {
     </thead>
     <tbody>
 
-    <HeadRadioButtons eventKey={eventKey} saveTodo={saveTodo} />
+    <HeadRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
 
 
     </tbody>

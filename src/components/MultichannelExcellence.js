@@ -34,7 +34,10 @@ const MultichannelExcellence = (props) => {
     </tr>
     </thead>
     <tbody>
-    <MultichannelExcellenceRadioButtons eventKey={props.eventKey}/>
+      <MultichannelExcellenceRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
 
     </tbody>
     </Table>

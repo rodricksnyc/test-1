@@ -34,7 +34,11 @@ const Copy = (props) => {
     </tr>
     </thead>
     <tbody>
-    <CopyRadioButtons/>
+      <CopyRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
+
 
     </tbody>
     </Table>

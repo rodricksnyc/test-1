@@ -35,9 +35,10 @@ const Css = (props) => {
     </thead>
     <tbody>
 
-
-
-        <CssRadioButtons eventKey={props.eventKey}/>
+        <CssRadioButtons
+          eventKey={props.eventKey}
+          radioValues={props.radioValues}
+          setRadioValues={props.setRadioValues} />
 
     </tbody>
     </Table>

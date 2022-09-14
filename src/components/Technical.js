@@ -34,7 +34,10 @@ const Technical = (props) => {
     </tr>
     </thead>
       <tbody>
-        <TechnicalRadioButtons eventKey={props.eventKey}/>
+        <TechnicalRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
       </tbody>
     </Table>
 

@@ -35,7 +35,10 @@ const Images = (props) => {
     </thead>
     <tbody>
 
-<ImagesRadioButtons/>
+      <ImagesRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
 
     </tbody>
     </Table>

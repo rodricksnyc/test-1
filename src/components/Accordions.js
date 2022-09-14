@@ -123,7 +123,7 @@ function Accordions(props) {
 
 
 const filteredCards = selectedCards.filter((card) => {
-  if (props.eventKey === 3) {
+  if (props.eventKey === "marketingCloud") {
     if (card.header !== "NAVIGATION") {
       return card;
     }

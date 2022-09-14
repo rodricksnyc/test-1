@@ -27,11 +27,7 @@ import Accordions from "./components/Accordions";
 
 import SelectTabs from "./components/SelectTabs";
 import SubmitDisplay from "./components/SubmitDisplay";
-import Todos from "./components/Todos";
 
-import Header from "./components/Header";
-
-import Demo from "./components/Demo";
 
 import "./styles.css";
 

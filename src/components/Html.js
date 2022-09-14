@@ -36,7 +36,11 @@ const Html = (props) => {
     <tbody>
 
 
-<HtmlRadioButtons/>
+    <HtmlRadioButtons
+      eventKey={props.eventKey}
+      radioValues={props.radioValues}
+      setRadioValues={props.setRadioValues} />
+
 
     </tbody>
     </Table>

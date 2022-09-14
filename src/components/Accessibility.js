@@ -35,7 +35,10 @@ const Accessibility = (props) => {
     </tr>
     </thead>
     <tbody>
-    <AccessibilityRadioButtons eventKey={props.eventKey}/>
+      <AccessibilityRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
 
     </tbody>
     </Table>

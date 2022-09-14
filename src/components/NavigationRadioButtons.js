@@ -79,85 +79,93 @@ var selectedButtons = [
 
 ];
 
-function NavigationRadioButtons(props) {
-  const [isVisible, setIsVisible] = useState(true);
+function NavigationRadioButtons({radioValues, setRadioValues, eventKey}) {
 
+
+  const [input, setInput] = useState("");
+
+  const handleChange = (e) => {
+    setRadioValues([
+      {
+        ...radioValues[0],
+        [eventKey]: {
+          ...radioValues[0][eventKey],
+          [e.target.name]: e.target.value,
+        },
+      },
+    ]);
+  };
+
+console.log(radioValues);
 var buttons = [];
 
-function handleClick(e) {
-  console.log(e.target.value);
-}
-
-
-selectedButtons.forEach(function(selectedButton, i){
 
 
 
-
-
-    buttons.push(
-
-
-                    <tr className="mx-row">
-                    <td align="top" className="mx-question">
-
-                    <p className="prompt gray"><span>{selectedButton.comment}</span>
-                    {selectedButton.tooltip}
-
-
-                    </p>
-                    </td>
-
-                    <td className="form-check">
-                      <input type="radio" className="form-check-input"
-                      name={selectedButton.name}
-                      value={selectedButton.value1}
-                      id={selectedButton.id1}
-                      onClick={(e) => handleClick(e)} />
-                      <label className="form-check-label" htmlFor={selectedButton.for1}>{selectedButton.label1}</label>
-                    </td>
-
-                    <td className="form-check">
-                      <input type="radio" className="form-check-input"
-                      name={selectedButton.name}
-                      value={selectedButton.value2}
-                      id={selectedButton.id2}
-                      onClick={(e) => handleClick(e)} />
-                      <label className="form-check-label" htmlFor={selectedButton.for2}>{selectedButton.label2}</label>
-                    </td>
-
-                    <td className="form-check">
-                      <input type="radio" className="form-check-input"
-                      name={selectedButton.name}
-                      value={selectedButton.value3}
-                      id={selectedButton.id3}
-                      onClick={(e) => handleClick(e)} />
-                      <label className="form-check-label" htmlFor={selectedButton.for3}>{selectedButton.label3}</label>
-                    </td>
-
-
-                    <td className="form-check">
-                      <input type="radio" className="form-check-input"
-                      name={selectedButton.name}
-                      value={selectedButton.value4}
-                      id={selectedButton.id4}
-                      onClick={(e) => handleClick(e)} />
-                      <label className="form-check-label" htmlFor={selectedButton.for4}>{selectedButton.label4}</label>
-                    </td>
-
-                    </tr>
-
-
-    )
-  
-  });
-
+selectedButtons.forEach(function (selectedButton, i) {
+  buttons.push(selectedButton);
+});
 
 
 
     return (
       <>
-    {buttons}
+  {buttons.map((selectedButton) => (
+      <tr className="mx-row">
+      <td align="top" className="mx-question">
+
+      <p className="prompt gray"><span>{selectedButton.comment}</span>
+      {selectedButton.tooltip}
+
+
+      </p>
+      </td>
+
+      <td className="form-check">
+        <input type="radio" className="form-check-input"
+        name={selectedButton.name}
+        value={selectedButton.value1}
+        id={selectedButton.id1}
+        onChange={handleChange}
+        />
+        <label className="form-check-label" htmlFor={selectedButton.for1}>{selectedButton.label1}</label>
+      </td>
+
+      <td className="form-check">
+        <input type="radio" className="form-check-input"
+        name={selectedButton.name}
+        value={selectedButton.value2}
+        id={selectedButton.id2}
+        onChange={handleChange}
+         />
+        <label className="form-check-label" htmlFor={selectedButton.for2}>{selectedButton.label2}</label>
+      </td>
+
+      <td className="form-check">
+        <input type="radio" className="form-check-input"
+        name={selectedButton.name}
+        value={selectedButton.value3}
+        id={selectedButton.id3}
+        onChange={handleChange}
+         />
+        <label className="form-check-label" htmlFor={selectedButton.for3}>{selectedButton.label3}</label>
+      </td>
+
+
+      <td className="form-check">
+        <input type="radio" className="form-check-input"
+        name={selectedButton.name}
+        value={selectedButton.value4}
+        id={selectedButton.id4}
+        onChange={handleChange}
+         />
+        <label className="form-check-label" htmlFor={selectedButton.for4}>{selectedButton.label4}</label>
+      </td>
+
+      </tr>
+
+          ))}
+
       </>
     );
 

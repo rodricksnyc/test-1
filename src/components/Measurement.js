@@ -34,7 +34,11 @@ const Measurement = (props) => {
     </tr>
     </thead>
     <tbody>
-    <MeasurementRadioButtons/>
+      <MeasurementRadioButtons
+        eventKey={props.eventKey}
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues} />
+
     </tbody>
     </Table>
 

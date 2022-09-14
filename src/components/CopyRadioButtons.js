@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react'
 
 import TooltipButton from "./TooltipButton";
 import { Accordion, AccordionButton, AccordionCollapse, AccordionContext, Alert, Anchor, Badge, Breadcrumb, BreadcrumbItem, Button, ButtonGroup, ButtonToolbar, Card, CardGroup, CardImg, Carousel, CarouselItem, CloseButton, Col, Collapse, Container, Dropdown, DropdownButton, Fade, Figure, FloatingLabel, Form, FormCheck, FormControl, FormFloating, FormGroup, FormLabel, FormSelect, FormText, Image, InputGroup, ListGroup, ListGroupItem, Modal, ModalBody, ModalDialog, ModalFooter, ModalHeader, ModalTitle, Nav, NavDropdown, NavItem, NavLink, Navbar, NavbarBrand, Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle, Overlay, OverlayTrigger, PageItem, Pagination, Placeholder, PlaceholderButton, Popover, PopoverBody, PopoverHeader, ProgressBar, Ratio, Row, SSRProvider, Spinner, SplitButton, Stack, Tab, TabContainer, TabContent, TabPane, Table, Tabs, ThemeProvider, Toast, ToastBody, ToastContainer, ToastHeader, ToggleButton, ToggleButtonGroup, Tooltip} from 'react-bootstrap';
@@ -100,17 +100,38 @@ var selectedButtons = [
 
 ];
 
-function CopyRadioButtons(props) {
+function CopyRadioButtons({radioValues, setRadioValues, eventKey}) {
 
 
+  const [input, setInput] = useState("");
+
+  const handleChange = (e) => {
+    setRadioValues([
+      {
+        ...radioValues[0],
+        [eventKey]: {
+          ...radioValues[0][eventKey],
+          [e.target.name]: e.target.value,
+        },
+      },
+    ]);
+  };
+
+console.log(radioValues);
 var buttons = [];
-function handleClick(e) {
-  console.log(e.target.value);
-}
 
-selectedButtons.forEach(function(selectedButton, i){
-    buttons.push(
 
+
+
+selectedButtons.forEach(function (selectedButton, i) {
+  buttons.push(selectedButton);
+});
+
+
+
+    return (
+      <>
+  {buttons.map((selectedButton) => (
       <tr className="mx-row">
       <td align="top" className="mx-question">
 
@@ -126,7 +147,8 @@ selectedButtons.forEach(function(selectedButton, i){
         name={selectedButton.name}
         value={selectedButton.value1}
         id={selectedButton.id1}
-        onClick={(e) => handleClick(e)} />
+        onChange={handleChange}
+        />
         <label className="form-check-label" htmlFor={selectedButton.for1}>{selectedButton.label1}</label>
       </td>
 
@@ -135,7 +157,8 @@ selectedButtons.forEach(function(selectedButton, i){
         name={selectedButton.name}
         value={selectedButton.value2}
         id={selectedButton.id2}
-        onClick={(e) => handleClick(e)} />
+        onChange={handleChange}
+         />
         <label className="form-check-label" htmlFor={selectedButton.for2}>{selectedButton.label2}</label>
       </td>
 
@@ -144,7 +167,8 @@ selectedButtons.forEach(function(selectedButton, i){
         name={selectedButton.name}
         value={selectedButton.value3}
         id={selectedButton.id3}
-        onClick={(e) => handleClick(e)} />
+        onChange={handleChange}
+         />
         <label className="form-check-label" htmlFor={selectedButton.for3}>{selectedButton.label3}</label>
       </td>
 
@@ -154,25 +178,15 @@ selectedButtons.forEach(function(selectedButton, i){
         name={selectedButton.name}
         value={selectedButton.value4}
         id={selectedButton.id4}
-        onClick={(e) => handleClick(e)} />
+        onChange={handleChange}
+         />
         <label className="form-check-label" htmlFor={selectedButton.for4}>{selectedButton.label4}</label>
       </td>
 
       </tr>
 
+          ))}
 
-
-
-
-    )
-  });
-
-
-
-
-    return (
-      <>
-    {buttons}
       </>
     );
 
