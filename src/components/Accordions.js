@@ -23,65 +23,120 @@ import TooltipButton from "./TooltipButton";
 
 
 function Accordions(props) {
-
+  const [radioValues, setRadioValues] = useState([
+    {
+      generic: {},
+      syngenta: {},
+      wordpress: {},
+      marketingCloud: {},
+    },
+  ]);
 
 
   var selectedCards = [
 
       {
         header: 'HEAD',
-        body: <Head eventKey={props.eventKey}/>,
+        body: <Head
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>,
       },
       {
         header: 'HTML',
-        body: <Html eventKey={props.eventKey}/>,
+        body: <Html
+          eventKey={props.eventKey}
+          radioValues={radioValues}
+          setRadioValues={setRadioValues}/>,
       },
       {
         header: 'CSS',
-        body: <Css eventKey={props.eventKey}/>,
+        body: <Css
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>,
       },
       {
         header: 'NAVIGATION',
-        body:  <Navigation eventKey={props.eventKey}/>,
+        body:  <Navigation
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>,
       },
       {
         header: 'IMAGES',
-        body: <Images eventKey={props.eventKey}/>,
+        body: <Images
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>,
       },
       {
         header: 'COPY',
-        body: <Copy eventKey={props.eventKey}/>,
+        body: <Copy
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>,
       },
       {
         header: 'ACCESSIBILITY',
-        body: <Accessibility eventKey={props.eventKey}/>,
+        body: <Accessibility
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>,
       },
       {
         header: 'USER EXPERIENCE',
-        body:  <UserExperience eventKey={props.eventKey}/>,
+        body:  <UserExperience
+          eventKey={props.eventKey}
+          radioValues={radioValues}
+          setRadioValues={setRadioValues}/>,
       },
       {
         header: 'TECHNICAL',
-        body: <Technical eventKey={props.eventKey}/>,
+        body: <Technical
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>
       },
       {
         header: 'TEAM SPECIFIC: MULTICHANNEL EXCELLENCE',
-        body: <MultichannelExcellence eventKey={props.eventKey}/>,
+        body: <MultichannelExcellence
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>
       },
       {
         header: 'TEAM SPECIFIC: MEASUREMENT',
-        body: <Measurement eventKey={props.eventKey}/>,
+        body: <Measurement
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>
       },
       {
         header: 'TEAM SPECIFIC: WEO',
-        body:  <WEO eventKey={props.eventKey}/>,
+        body:  <WEO
+        eventKey={props.eventKey}
+        radioValues={radioValues}
+        setRadioValues={setRadioValues}/>
       },
   ];
+
+
+const filteredCards = selectedCards.filter((card) => {
+  if (props.eventKey === 3) {
+    if (card.header !== "NAVIGATION") {
+      return card;
+    }
+  } else {
+    return selectedCards;
+  }
+});
+
 
 var cards = [];
 
 
-selectedCards.forEach(function(selectedCard, i){
+filteredCards.forEach(function(selectedCard, i){
     cards.push(
    <Accordion defaultActiveKey={0} key={i}>
 
