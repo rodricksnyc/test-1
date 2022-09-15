@@ -53,7 +53,7 @@ var selectedButtons = [
 
     {
       comment:'Input type & mode: Form inputs are the right type for their use case and have appropriate inputmode values',
-      tooltip: <TooltipButton text='type: text, tel, email, phone, number, search, url, date, month, time, password, etc.<br>inputmode: text, tel, email, numeric, decimal, search, url<br>This helps mobile devices pull up the right keyboard variant.'/>,
+      tooltip: <TooltipButton title='type: text, tel, email, phone, number, search, url, date, month, time, password, etc.<br>inputmode: text, tel, email, numeric, decimal, search, url<br>This helps mobile devices pull up the right keyboard variant.'/>,
       name: 'inputTypeMode',
       value1: "InputTypeMode_Pass",
       id1: "InputTypeMode_Pass",
