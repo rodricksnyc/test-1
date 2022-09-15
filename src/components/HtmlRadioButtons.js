@@ -102,7 +102,7 @@ var selectedButtons = [
 function HtmlRadioButtons({radioValues, setRadioValues, eventKey}) {
 
 
-  const [input, setInput] = useState("");
+
 
   const handleChange = (e) => {
     setRadioValues([
@@ -114,9 +114,13 @@ function HtmlRadioButtons({radioValues, setRadioValues, eventKey}) {
         },
       },
     ]);
+
+
   };
 
-// console.log(radioValues);
+
+
+
 var buttons = [];
 
 

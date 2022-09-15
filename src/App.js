@@ -71,19 +71,15 @@ const App = () => {
 //this will take a snapshot of everything on the page and send to Firebase
 
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  saveTodo(projectData, tester, url, text);
-  setProjectData("");
-  setTester("");
-  setURL("");
-  setText("");
+//finding radio button radioValues
 
 
-  console.log(projectData,tester, url, text);
 
 
-};
+
+
+
+
 
 
 const [todos, setTodos] = useState([]);
@@ -95,18 +91,51 @@ const [url, setURL] = useState(null);
 const [text, setText] = useState(null);
 
 
+
+
+
+const [radioValues, setRadioValues] = useState([
+  {
+    generic: {},
+    syngenta: {},
+    wordpress: {},
+    marketingCloud: {},
+  },
+]);
+
+
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  saveTodo(projectData, tester, url, text, radioValues);
+  setProjectData("");
+  setTester("");
+  setURL("");
+  setText("");
+  setRadioValues("")
+
+
+  console.log(projectData,tester, url, text, radioValues);
+
+
+};
+
+
 useEffect(() => {
   getTodos();
 }, []);
 
-const saveTodo = (projectData, tester, url, text) => {
+const saveTodo = (projectData, tester, url, text, radioValues) => {
+
+  console.log(radioValues);
   const saveToFirebase = firebase.firestore();
   saveToFirebase.collection("input-field1").add({
     id: uuid(),
-    item: projectData,
-    item2: tester,
-    item3: url,
-    item5: text
+    ProjectName: projectData,
+    Tester: tester,
+    Url: url,
+    Textarea: text,
+    RadioButtons: radioValues
   });
 };
 
@@ -243,7 +272,7 @@ const handleInputChange = (e) => {
 
 
 
-    <SelectTabs/>
+    <SelectTabs saveTodo={saveTodo} getTodos={getTodos} setRadioValues={setRadioValues} radioValues={radioValues}/>
 
 
 

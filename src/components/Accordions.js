@@ -23,14 +23,6 @@ import TooltipButton from "./TooltipButton";
 
 
 function Accordions(props) {
-  const [radioValues, setRadioValues] = useState([
-    {
-      generic: {},
-      syngenta: {},
-      wordpress: {},
-      marketingCloud: {},
-    },
-  ]);
 
 
   var selectedCards = [
@@ -39,85 +31,85 @@ function Accordions(props) {
         header: 'HEAD',
         body: <Head
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>,
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'HTML',
         body: <Html
           eventKey={props.eventKey}
-          radioValues={radioValues}
-          setRadioValues={setRadioValues}/>,
+          radioValues={props.radioValues}
+          setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'CSS',
         body: <Css
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>,
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'NAVIGATION',
         body:  <Navigation
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>,
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'IMAGES',
         body: <Images
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>,
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'COPY',
         body: <Copy
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>,
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'ACCESSIBILITY',
         body: <Accessibility
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>,
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'USER EXPERIENCE',
         body:  <UserExperience
           eventKey={props.eventKey}
-          radioValues={radioValues}
-          setRadioValues={setRadioValues}/>,
+          radioValues={props.radioValues}
+          setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'TECHNICAL',
         body: <Technical
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'TEAM SPECIFIC: MULTICHANNEL EXCELLENCE',
         body: <MultichannelExcellence
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'TEAM SPECIFIC: MEASUREMENT',
         body: <Measurement
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
       {
         header: 'TEAM SPECIFIC: WEO',
         body:  <WEO
         eventKey={props.eventKey}
-        radioValues={radioValues}
-        setRadioValues={setRadioValues}/>
+        radioValues={props.radioValues}
+        setRadioValues={props.setRadioValues}/>,
       },
   ];
 

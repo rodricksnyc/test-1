@@ -4,7 +4,7 @@ import { Accordion, AccordionButton, AccordionCollapse, AccordionContext, Alert,
 
 import Accordions from "./Accordions";
 
-function SelectTabs() {
+function SelectTabs({setRadioValues, radioValues}) {
   const [key, setKey] = useState("generic");
 
   return (
@@ -13,16 +13,24 @@ function SelectTabs() {
       onSelect={(key) => setKey(key)}
       className="mb-5">
       <Tab eventKey="generic" title="GENERIC" value="Generic">
-        <Accordions eventKey={key} />
+        <Accordions eventKey={key}
+        setRadioValues={setRadioValues}
+        radioValues={radioValues} />
       </Tab>
       <Tab eventKey="syngenta" title="SYNGENTA" value="Syngenta">
-        <Accordions eventKey={key} />
+        <Accordions eventKey={key}
+        setRadioValues={setRadioValues}
+        radioValues={radioValues} />
       </Tab>
       <Tab eventKey="wordpress" title="WORDPRESS" value="Wordpress">
-        <Accordions eventKey={key} />
+        <Accordions eventKey={key}
+        setRadioValues={setRadioValues}
+        radioValues={radioValues} />
       </Tab>
       <Tab eventKey="marketingCloud" title="MARKETING CLOUD" value="MC">
-        <Accordions eventKey={key} />
+        <Accordions eventKey={key}
+        setRadioValues={setRadioValues}
+        radioValues={radioValues} />
       </Tab>
     </Tabs>
   );
