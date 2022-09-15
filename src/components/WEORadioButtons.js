@@ -104,7 +104,6 @@ var selectedButtons = [
 
 function WEORadioButtons({radioValues, setRadioValues, eventKey}) {
 
-
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
@@ -119,7 +118,7 @@ function WEORadioButtons({radioValues, setRadioValues, eventKey}) {
     ]);
   };
 
-  console.log(radioValues);
+  // console.log(radioValues);
 
 var buttons = [];
 

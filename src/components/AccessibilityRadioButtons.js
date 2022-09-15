@@ -190,7 +190,7 @@ var selectedButtons = [
       label4: "N/A",
     },
     {
-     
+
       comment: <div dangerouslySetInnerHTML={{__html:comment1}} />,
       tooltip: '',
       name: 'fontAwesomeAria',
@@ -233,7 +233,7 @@ function AccessibilityRadioButtons({radioValues, setRadioValues, eventKey}) {
     ]);
   };
 
-  console.log(radioValues);
+  // console.log(radioValues);
 
 var buttons = [];
 

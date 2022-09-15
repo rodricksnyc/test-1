@@ -29,10 +29,11 @@ import SelectTabs from "./components/SelectTabs";
 import SubmitDisplay from "./components/SubmitDisplay";
 
 
+
 import "./styles.css";
 
 const current = new Date();
-const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
+const thisDate = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
 
 
 const App = () => {
@@ -48,57 +49,97 @@ const App = () => {
 
 //this will take a snapshot of everything on the page and send to Firebase
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const elementsArray = [...event.target.elements]
-    const formData = elementsArray.reduce((accumulator, currentValue) =>{
-        if (currentValue.id){
-          accumulator[currentValue.id] = currentValue.value
-        }
-
-        return accumulator;
-
-    }, {})
-
-     db.collection("project-data").add(formData);
-
-      console.log(formData)
-
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //
+  //   const elementsArray = [...event.target.elements]
+  //   const formData = elementsArray.reduce((accumulator, currentValue) =>{
+  //       if (currentValue.id){
+  //         accumulator[currentValue.id] = currentValue.value
+  //       }
+  //
+  //       return accumulator;
+  //
+  //   }, {})
+  //
+  //    db.collection("project-data").add(formData);
+  //
+  //     console.log(formData)
+  //
+  // };
 
 //this will take a snapshot of everything on the page and send to Firebase
 
 
+const handleSubmit = (e) => {
+  e.preventDefault();
+  saveTodo(projectData, tester, url, text);
+  setProjectData("");
+  setTester("");
+  setURL("");
+  setText("");
 
-//
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//
-// };
-// const [todos, setTodos] = useState([]);
-//
-//   useEffect(() => {
-//     getTodos();
-//   }, []);
-//
-//   const saveTodo = (input) => {
-//     const saveToFirebase = firebase.firestore();
-//     saveToFirebase.collection("todos").add({
-//       id: uuid(),
-//       item: input,
-//     });
-//   };
-//   const getTodos = () => {
-//     const getFromFirebase = firebase.firestore().collection("todos");
-//     getFromFirebase.onSnapshot((querySnapShot) => {
-//       const saveFirebaseTodos = [];
-//       querySnapShot.forEach((doc) => {
-//         saveFirebaseTodos.push(doc.data());
-//       });
-//       setTodos(saveFirebaseTodos);
-//     });
-//   };
+
+  console.log(projectData,tester, url, text);
+
+
+};
+
+
+const [todos, setTodos] = useState([]);
+
+const [projectData, setProjectData] = useState(null);
+const [tester, setTester] = useState(null);
+const [url, setURL] = useState(null);
+
+const [text, setText] = useState(null);
+
+
+useEffect(() => {
+  getTodos();
+}, []);
+
+const saveTodo = (projectData, tester, url, text) => {
+  const saveToFirebase = firebase.firestore();
+  saveToFirebase.collection("input-field1").add({
+    id: uuid(),
+    item: projectData,
+    item2: tester,
+    item3: url,
+    item5: text
+  });
+};
+
+
+const getTodos = () => {
+  const getFromFirebase = firebase.firestore().collection("input-field1");
+  getFromFirebase.onSnapshot((querySnapShot) => {
+    const saveFirebaseTodos = [];
+    querySnapShot.forEach((doc) => {
+      saveFirebaseTodos.push(doc.data());
+    });
+    setTodos(saveFirebaseTodos);
+  });
+};
+
+const handleInputChange = (e) => {
+       const {id , value} = e.target;
+       if(id === "projectData"){
+           setProjectData(value);
+       }
+       if(id === "tester"){
+           setTester(value);
+       }
+       if(id === "url"){
+           setURL(value);
+       }
+
+       if(id === "textArea1"){
+           setText(value);
+       }
+
+   }
+
 
     return (
 
@@ -126,6 +167,7 @@ const App = () => {
 
 
 
+
   <div className="firstdiv" style={{ display: hide ? "none" : "block" }}>
     <Form onSubmit={handleSubmit}>
 
@@ -134,18 +176,23 @@ const App = () => {
       <Row className="mt-5">
         <Col xs={12} md={9}>
 
-          <Form.Group controlId="projectData">
+
+          <Form.Group controlId="projectData" saveTodo={saveTodo} getTodos={getTodos}>
              <Form.Label>ADVANTAGE ASSIGNMENT</Form.Label>
-             <Form.Control/>
+             <Form.Control
+             value={projectData}
+             onChange = {(e) => handleInputChange(e)}/>
          </Form.Group>
 
         </Col>
 
         <Col xs={12} md={3}>
 
-          <Form.Group controlId="tester">
+          <Form.Group controlId="tester" saveTodo={saveTodo} getTodos={getTodos}>
              <Form.Label>QA TESTER(S)</Form.Label>
-             <Form.Control/>
+             <Form.Control
+             value={tester}
+             onChange = {(e) => handleInputChange(e)}/>
          </Form.Group>
 
 
@@ -156,9 +203,11 @@ const App = () => {
     <Row className="mt-2">
       <Col xs={12} lg={9} md={12}>
 
-        <Form.Group controlId="url">
+        <Form.Group controlId="url" saveTodo={saveTodo} getTodos={getTodos}>
            <Form.Label>URL OF PAGE</Form.Label>
-           <Form.Control/>
+           <Form.Control
+           value={url}
+           onChange = {(e) => handleInputChange(e)}/>
        </Form.Group>
 
 
@@ -167,9 +216,10 @@ const App = () => {
       <Col xs={12} lg={3} md={12}>
 
 
-        <Form.Group controlId="date" value={date}>
+        <Form.Group controlId="date">
            <Form.Label>INITIAL TEST DATE</Form.Label>
-           <Form.Control value={date}/>
+           <Form.Control value={thisDate} placeholder={thisDate}
+          />
        </Form.Group>
 
 
@@ -206,9 +256,11 @@ const App = () => {
 
     <Col xs={12} md={10}>
 
-        <Form.Group className="mb-3" controlId="textArea1">
+        <Form.Group className="mb-3" controlId="textArea1" saveTodo={saveTodo} getTodos={getTodos}>
           <Form.Label>Please feel free to use the text field below to add any comments you think are necessary regarding issues you may have seen!</Form.Label>
-          <Form.Control as="textarea" rows={3} />
+          <Form.Control as="textarea" rows={3}
+          value={text}
+          onChange = {(e) => handleInputChange(e)}/>
       </Form.Group>
 
       </Col>

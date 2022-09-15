@@ -147,7 +147,7 @@ function MultichannelExcellenceRadioButtons({radioValues, setRadioValues, eventK
     ]);
   };
 
-  console.log(radioValues);
+  // console.log(radioValues);
 
 var buttons = [];
 

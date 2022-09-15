@@ -206,7 +206,7 @@ function UserExperienceRadioButtons({radioValues, setRadioValues, eventKey}) {
     ]);
   };
 
-console.log(radioValues);
+// console.log(radioValues);
 var buttons = [];
 
 
